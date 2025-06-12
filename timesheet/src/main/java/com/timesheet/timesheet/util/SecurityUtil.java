@@ -15,24 +15,36 @@ public class SecurityUtil {
         return new BCryptPasswordEncoder();
     }
 
-    // userId token'dan geliyor (subject), principal'a yazılmış olacak
+    // Kullanıcıyı veritabanından find ile getir (tam entity lazım olan yerlerde)
     public static User getCurrentUser(UserRepository userRepository) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null ||
                 !authentication.isAuthenticated() ||
                 "anonymousUser".equals(authentication.getName())) {
-            throw new RuntimeException("Giriş yapılmamış kullanıcı.");
+            throw new RuntimeException("❌ Giriş yapılmamış kullanıcı.");
         }
 
         Long userId;
         try {
             userId = Long.parseLong(authentication.getPrincipal().toString());
         } catch (Exception e) {
-            throw new RuntimeException("Kullanıcı kimliği geçersiz.");
+            throw new RuntimeException("❌ Kullanıcı kimliği geçersiz.");
         }
 
+        System.out.println("🔍 [SecurityUtil] Aktif kullanıcı ID: " + userId);
         return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı: " + userId));
+                .orElseThrow(() -> new RuntimeException("❌ Kullanıcı bulunamadı: " + userId));
+    }
+
+    // Sadece ID döndür (proxy set edecek yerlerde)
+    public static Long getCurrentUserId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName())) {
+            throw new RuntimeException("❌ Giriş yapılmamış kullanıcı.");
+        }
+        Long userId = Long.parseLong(auth.getPrincipal().toString());
+        System.out.println("🔑 [SecurityUtil] currentUserId(): " + userId);
+        return userId;
     }
 }

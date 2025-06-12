@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/timeshhet/timesheets/users")
+@RequestMapping("/timesheet/timesheets/users")
 @RequiredArgsConstructor
 public class TimesheetController {
 
@@ -41,5 +41,13 @@ public class TimesheetController {
             @RequestBody Timesheet updated
     ) {
         return ResponseEntity.ok(timesheetService.updateTimesheet(id, updated));
+    }
+    @GetMapping("/admin/user/{userId}")
+    public ResponseEntity<List<Timesheet>> getTimesheetsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(timesheetService.getTimesheetsByUserId(userId));
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Timesheet>> getAllTimesheets() {
+        return ResponseEntity.ok(timesheetService.getAllTimesheets());
     }
 }

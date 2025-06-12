@@ -15,5 +15,7 @@ public interface TimesheetService {
 
     Timesheet updateTimesheet(Long timesheetId, Timesheet updatedTimesheet);
 
-    List<Timesheet> getAllTimesheets(); // sadece admin görebilir
+    List<Timesheet> getAllTimesheets();
+    List<Timesheet> getTimesheetsByUserId(Long userId);
+
 }

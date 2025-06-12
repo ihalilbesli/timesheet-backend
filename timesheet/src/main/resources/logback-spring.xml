@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Log klasörü -->
+    <property name="LOG_PATH"  value="logs"/>
+
+    <!-- Aktif günün dosyası -->
+    <property name="LOG_FILE"  value="${LOG_PATH}/timesheet.log"/>
+
+    <!-- ====== Günlük dosyaya yaz, her gün yeni dosya oluştur ====== -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+
+        <!-- Tarihe göre döndürme -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Her gün YYYY-MM-dd takısı ile yeni dosya -->
+            <fileNamePattern>${LOG_PATH}/timesheet-%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- 30 günden eski logları .gz yaparak sil / arşivle -->
+            <maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+
+        <!-- Satır formatı -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- (İsteğe bağlı) Konsola da yazmaya devam et -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
