@@ -109,5 +109,27 @@ public class TimesheetServiceImpl implements TimesheetService {
         System.out.println("🔎 [getTimesheetsByUserId] Kullanıcı ID: " + userId);
         return timesheetRepository.findByUserId(userId);
     }
+    @Override
+    public List<Timesheet> getTimesheetsByCurrentUserOnDate(LocalDate date) {
+        User currentUser = SecurityUtil.getCurrentUser(userRepository);
+        System.out.println("📅 [getTimesheetsByCurrentUserOnDate] Tarih: " + date);
+        return timesheetRepository.findByUserIdAndDate(currentUser.getId(), date);
+    }
+    @Override
+    public void deleteTimesheet(Long id) {
+        System.out.println("🗑️ [deleteTimesheet] ID: " + id);
+        User currentUser = SecurityUtil.getCurrentUser(userRepository);
+        Timesheet timesheet = timesheetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Timesheet bulunamadı."));
+
+        // Kullanıcı kendi kaydını veya admin olarak silebilir
+        if (!timesheet.getUser().getId().equals(currentUser.getId()) &&
+                currentUser.getRole() != User.Role.ADMIN) {
+            throw new RuntimeException("🚫 Silme yetkiniz yok.");
+        }
+
+        timesheetRepository.deleteById(id);
+        System.out.println("✅ Timesheet silindi.");
+    }
 
 }

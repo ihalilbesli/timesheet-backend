@@ -50,4 +50,14 @@ public class TimesheetController {
     public ResponseEntity<List<Timesheet>> getAllTimesheets() {
         return ResponseEntity.ok(timesheetService.getAllTimesheets());
     }
+    @GetMapping("/by-date/{date}")
+    public ResponseEntity<List<Timesheet>> getTimesheetsByDate(
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.ok(timesheetService.getTimesheetsByCurrentUserOnDate(date));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTimesheet(@PathVariable Long id) {
+        timesheetService.deleteTimesheet(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface UserService {
 
+    User getCurrentUser();
+
     User save(User user);
 
     Optional<User> findById(Long id);
@@ -15,4 +17,12 @@ public interface UserService {
     boolean existsByEmail(String email);
 
     Optional<User> findByUsername(String username);
+
+    User updateCurrentUser(User updatedUser);
+
+    void updatePassword(String oldPassword, String newPassword);
+
+    void deleteUserById(Long id);
+
+
 }

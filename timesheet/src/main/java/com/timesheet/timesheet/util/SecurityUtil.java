@@ -10,10 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class SecurityUtil {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 
     // Kullanıcıyı veritabanından find ile getir (tam entity lazım olan yerlerde)
     public static User getCurrentUser(UserRepository userRepository) {

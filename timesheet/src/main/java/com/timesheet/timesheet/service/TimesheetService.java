@@ -16,6 +16,13 @@ public interface TimesheetService {
     Timesheet updateTimesheet(Long timesheetId, Timesheet updatedTimesheet);
 
     List<Timesheet> getAllTimesheets();
+
     List<Timesheet> getTimesheetsByUserId(Long userId);
+
+    List<Timesheet> getTimesheetsByCurrentUserOnDate(LocalDate date);
+
+    void deleteTimesheet(Long id);
+
+
 
 }
