@@ -3,6 +3,11 @@
 Bu proje, kullanıcıların zaman çizelgesi (timesheet) oluşturup yönetmesini sağlayan bir web uygulamasının sunucu (backend) tarafıdır. Spring Boot kullanılarak geliştirilmiştir ve JWT ile güvenli giriş-çıkış sistemi içerir.
 Bu backend servisi, Angular ile geliştirilen frontend arayüzüyle birlikte çalışmaktadır.
 
+
+<img src="https://github.com/user-attachments/assets/4be8ce84-1c33-4819-859f-7c1a51ddb282" alt="Timesheet Backend Mimari Diyagramı" width="400"/>
+
+
+
 Kullanıcılar:
 - Giriş yapabilir, kayıt olabilir
 - Timesheet (çalışma saati) girişi yapabilir
@@ -16,14 +21,21 @@ Yöneticiler (Admin):
 
   ## 🧰 Kullanılan Teknolojiler
 
+  <p align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="50"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-plain.svg" width="50"/>
+</p>
+
 Aşağıda, bu backend projesinde kullanılan başlıca teknolojiler listelenmiştir:
 
 - **Java 17** – Backend geliştirme dili
-- **Spring Boot 3** – Hızlı ve modern web uygulamaları için framework
-- **Spring Security** – Kimlik doğrulama ve yetkilendirme işlemleri
-- **JWT (JSON Web Token)** – Güvenli kullanıcı oturumları
-- **Spring Data JPA (Hibernate)** – ORM ile veritabanı işlemleri
-- **MySQL ** – Veritabanı yönetim sistemi
+- **Spring Boot 3** – Hızlı ve modern web uygulamaları için çatı (framework)
+- **Spring Security** – Kimlik doğrulama ve rol bazlı yetkilendirme
+- **JWT (JSON Web Token)** – Kullanıcı oturumlarının güvenli yönetimi
+- **Spring Data JPA** – Repository tabanlı veri erişim arayüzü
+- **Hibernate ORM** – Java nesnelerini veritabanı tablolarına eşleyen ORM aracı
+- **MySQL** – Veritabanı yönetim sistemi
 - **Maven** – Proje bağımlılık ve build yönetimi
 
 ## 📁 Proje Klasör Yapısı
