@@ -40,3 +40,33 @@ com.aksigorta.timesheet
 
 Bu yapı, katmanlı bir mimari anlayışıyla oluşturulmuştur. Her klasörün görevi belirgindir ve SOLID prensiplerine uygun geliştirme hedeflenmiştir.
 
+---
+
+## 🗃️ Veritabanı Yapısı
+
+Proje iki temel tablo üzerinde çalışmaktadır: `users` ve `timesheets`.
+
+### 🧑 users tablosu
+
+Kullanıcı bilgilerini içerir.
+
+| Alan Adı     | Veri Tipi | Açıklama               |
+|--------------|-----------|------------------------|
+| id           | Long      | Otomatik artan ID      |
+| username     | String    | Benzersiz kullanıcı adı|
+| email        | String    | Benzersiz e-posta      |
+| password     | String    | Şifre (hashlenmiş)     |
+| role         | Enum      | USER veya ADMIN        |
+
+### ⏱️ timesheets tablosu
+
+Kullanıcıların günlük/haftalık çalışma saatlerini içerir.
+
+| Alan Adı     | Veri Tipi | Açıklama                       |
+|--------------|-----------|--------------------------------|
+| id           | Long      | Otomatik artan ID              |
+| user_id      | Long      | Bağlı olduğu kullanıcı (FK)    |
+| date         | LocalDate | Çalışma tarihi                 |
+| start_time   | LocalTime | Başlangıç saati                |
+| end_time     | LocalTime | Bitiş saati                    |
+| description  | String    | Yapılan işin açıklaması        |
