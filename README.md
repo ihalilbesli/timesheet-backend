@@ -26,11 +26,26 @@ Aşağıda, bu backend projesinde kullanılan başlıca teknolojiler listelenmi�
 - **MySQL ** – Veritabanı yönetim sistemi
 - **Maven** – Proje bağımlılık ve build yönetimi
 
-  ## 📁 Proje Klasör Yapısı
+## 📁 Proje Klasör Yapısı
 
 Aşağıda `com.aksigorta.timesheet` paket yapısı ve alt klasörler listelenmiştir:
 
-<pre lang="markdown"> ## 📁 Proje Klasör Yapısı Aşağıda `com.aksigorta.timesheet` paket yapısı ve alt klasörler listelenmiştir: ``` com.aksigorta.timesheet ├── controller # API endpoint sınıfları │ ├── UserController │ ├── TimesheetController │ └── AdminController ├── service # Servis arayüzleri │ ├── UserService │ ├── TimesheetService │ └── AdminService ├── service.impl # Servis implementasyonları ├── model # Entity sınıfları (User, Timesheet) ├── repository # Spring Data JPA arayüzleri │ ├── UserRepository │ └── TimesheetRepository ├── config # Güvenlik ve JWT yapılandırmaları ``` Bu yapı, katmanlı mimari anlayışıyla oluşturulmuştur. Her klasörün görevi belirgindir ve SOLID prensiplerine uygun geliştirme hedeflenmiştir. </pre>
+```
+com.timesheet.timesheet
+│
+├── config             # Güvenlik ayarları, JWT konfigürasyonları
+├── controller         # REST API endpoint sınıfları
+├── dto                # Veri transfer nesneleri (Data Transfer Objects)
+├── filter             # Request filtreleme işlemleri (örneğin JWT filter)
+├── model              # Entity sınıfları (User, Timesheet)
+├── repository         # Spring Data JPA repository arayüzleri
+├── service            # İş mantığını barındıran servis sınıfları
+├── util               # Yardımcı (utility) sınıflar
+│
+└── TimesheetApplication  # Uygulamanın giriş noktası (main class)
+```
+
+Bu yapı, katmanlı bir mimari anlayışıyla oluşturulmuştur. Her klasörün görevi belirgindir ve SOLID prensiplerine uygun geliştirme hedeflenmiştir.
 
 ## 🗃️ Veritabanı Yapısı
 
@@ -60,3 +75,42 @@ Kullanıcıların günlük/haftalık çalışma saatlerini içerir.
 | start_time   | LocalTime | Başlangıç saati                |
 | end_time     | LocalTime | Bitiş saati                    |
 | description  | String    | Yapılan işin açıklaması        |
+
+
+## 🔧 Uygulamanın Kurulumu ve Çalıştırılması
+
+Aşağıdaki adımları izleyerek projeyi kendi ortamınızda çalıştırabilirsiniz:
+
+### 1. Projeyi Klonlayın
+
+```bash
+git clone https://github.com/ihalilbesli/timesheet-backend.git
+cd timesheet-backend
+```
+
+### 2. Veritabanı Ayarları
+
+`application.properties` ya da `application.yml` dosyasında veritabanı bağlantı bilgilerini düzenleyin:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/timesheet
+spring.datasource.username=root
+spring.datasource.password=root
+```
+
+> Gerekirse kendi MySQL bilgilerinize göre değiştirin.
+
+### 3. Bağımlılıkları Yükleyin ve Uygulamayı Başlatın
+
+```bash
+./mvnw clean install
+./mvnw spring-boot:run
+```
+
+Ya da bir IDE (IntelliJ IDEA, Eclipse vs.) üzerinden `TimesheetApplication` sınıfını çalıştırabilirsiniz.
+
+---
+
+Uygulama çalıştıktan sonra backend şu adreste çalışır:  
+📍 `http://localhost:8080`
+
